@@ -13,7 +13,7 @@ Tested on Windows 10 x64.
 5. Visit some TLS-encrypted and unencrypted websites, the pie slices should reflect those visists
 
 ## How it works
-It's kind of simple and stupid. Libpcap is used to filter out traffic going to port 80 and port 443. Qt is then used to create a piechart that shows the relative amount of secure traffic compared to unsecure traffic. Port 80 can be used for secured traffic while 443 can be used for unsecured traffic. So there is no 100% guarantee that the traffic really to those port is secure/unsecure. There's no inspection of the traffic itself.
+It's kind of simple and stupid. Libpcap is used to filter out traffic going to port 80 and port 443. Qt is then used to create a piechart that shows the relative amount of secure traffic compared to unsecure traffic. Port 80 can be used for secured traffic while 443 can be used for unsecured traffic. So there is no 100% guarantee that the traffic to those ports is really secure/unsecure. There's no inspection of the traffic itself.
 
 ## Development
 HowMuchTLS is developed in Visual Studio 2017. The program depends on Qt >= 5.9 and WinPcap >= 4.1.3.
