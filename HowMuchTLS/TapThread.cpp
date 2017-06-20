@@ -1,5 +1,6 @@
 #include "TapThread.h"
 
+// Run pcap on the network interface
 void TapThread::run() {
 	char errBuf[PCAP_ERRBUF_SIZE];
 	bpf_program bp;
@@ -26,6 +27,7 @@ TapThread::TapThread(const QString &s)
 	selectedInterfaceName = s;
 }
 
+// When a packet is received, signal the main thread
 void processPacket(u_char * param, const pcap_pkthdr * header, const u_char * pkt_data)
 {
 	TapThread *t = (TapThread*)param;

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <QtCharts/QChartView>
 #include <QtWidgets/QMainWindow>
+#include <QtCharts/QChartView>
 #include <QtCharts/QPieSeries>
 
 QT_CHARTS_USE_NAMESPACE
