@@ -20,6 +20,7 @@ void TapThread::run() {
 
 }
 
+// Initialize TapThread with the network interface name
 TapThread::TapThread(const QString &s)
 {
 	selectedInterfaceName = s;
