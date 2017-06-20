@@ -13,13 +13,11 @@ void TapThread::run() {
 		1000,
 		errBuf);
 
-	status = pcap_compile(tapInterface, &bp, filterText, 0, 0);
-	status = pcap_setfilter(tapInterface, &bp);
+	pcap_compile(tapInterface, &bp, filterText, 0, 0);
+	pcap_setfilter(tapInterface, &bp);
 
-	while ((status = pcap_dispatch(tapInterface, -1, processPacket, (u_char*)this)) > -1) {
-		//Sleep(100);
-	}
-	int t = 0;
+	while ((status = pcap_dispatch(tapInterface, -1, processPacket, (u_char*)this)) > -1);
+
 }
 
 TapThread::TapThread(const QString &s)
