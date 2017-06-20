@@ -1,4 +1,10 @@
 #include "HowMuchTLS.h"
+#include <QtWidgets/QMainWindow>
+#include <QtCharts/QChartView>
+#include <QtCharts/QPieSeries>
+#include <QTimer>
+#include <qmath.h>
+#include "pcap.h"
 #include "TapThread.h"
 
 HowMuchTLS::HowMuchTLS(QWidget *parent)
@@ -11,6 +17,9 @@ HowMuchTLS::HowMuchTLS(QWidget *parent)
 	startUiRefresher();
 }
 
+// We can't update the UI on each received package because the UI would
+// freeze when there's a lot of traffic. So we'll just update the UI 
+// every second.
 void HowMuchTLS::startUiRefresher()
 {
 	QTimer *timer = new QTimer(this);
@@ -32,6 +41,7 @@ void HowMuchTLS::startUiRefresher()
 	timer->start(1000);
 }
 
+// Setup the pie chart and return the QChartView
 QChartView * HowMuchTLS::createChart()
 {
 	QChart *pieChart = new QChart();
@@ -61,8 +71,9 @@ QChartView * HowMuchTLS::createChart()
 	return chartView;
 }
 
+// Get all network interfaces and start a monitoring thread for each interface
 void HowMuchTLS::startScan()
-{
+{	
 	pcap_if_t *alldevs, *iface;
 	pcap_findalldevs(&alldevs, NULL);
 	for (iface = alldevs; iface; iface = iface->next) {
@@ -74,6 +85,7 @@ void HowMuchTLS::startScan()
 	pcap_freealldevs(iface);
 }
 
+// Update the packet counters for each packet that has port 80 or 443 as destination
 void HowMuchTLS::processPacket(int dstPortNr)
 {
 	switch (dstPortNr)

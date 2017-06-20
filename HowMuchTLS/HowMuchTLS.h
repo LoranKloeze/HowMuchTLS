@@ -1,11 +1,8 @@
 #pragma once
 
-#include <QtWidgets/QMainWindow>
 #include <QtCharts/QChartView>
+#include <QtWidgets/QMainWindow>
 #include <QtCharts/QPieSeries>
-#include <QTimer>
-#include <qmath.h>
-#include "pcap.h"
 
 QT_CHARTS_USE_NAMESPACE
 
